@@ -1,0 +1,1 @@
+<FrameLayout android:layout_width="fill_parent" android:layout_height="wrap_content" xmlns:android="http://schemas.android.com/apk/res/android" xmlns:card_view="http://schemas.android.com/apk/res-auto"><ImageView android:layout_width="30dp" android:id="@+id/left_pic" android:layout_marginLeft="5dp" android:layout_height="30dp" /></FrameLayout>

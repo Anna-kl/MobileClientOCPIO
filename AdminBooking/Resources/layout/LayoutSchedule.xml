@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+<android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerView"
+        android:orientation="horizontal"
+        android:layout_marginTop="50dp"
+        android:layout_marginBottom="10dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+        <View
+        android:layout_width="wrap_content"
+        android:layout_height="2dp"
+        android:layout_marginTop="160dp"
+        android:layout_marginBottom="20dp"
+        android:background="#FF909090"/>
+    <!-- Заголовок: Названии компании -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout1"
+        android:layout_marginTop="200dp"
+        android:layout_height="500px">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:id="@+id/linearLayout2"
+            android:orientation="horizontal"
+            android:layout_height="500px">
+            </LinearLayout>
+        </LinearLayout>
+
+<android.support.design.widget.BottomNavigationView
+    android:id="@+id/navigation" 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="?android:attr/windowBackground"
+    android:layout_alignParentBottom="true"
+    app:menu="@menu/bottom" />
+
+</RelativeLayout>

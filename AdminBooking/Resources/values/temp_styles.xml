@@ -1,0 +1,156 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.MaterialComponents.Light">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+      <style name="MyTheme.Splash" parent ="Theme.MaterialComponents.Light.NoActionBar">
+    <item name="android:windowBackground">@drawable/splash_screen</item>
+    <item name="android:windowNoTitle">true</item>  
+    <item name="android:windowFullscreen">true</item>  
+    <item name="android:windowContentOverlay">@null</item>  
+    <item name="android:windowActionBar">false</item>  
+  </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.MaterialComponents.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.MaterialComponents.Light" />
+  <style name="col1">
+    <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">600</item>
+ 
+    <item name="android:padding">3dp</item>
+    <item name="android:layout_column">1</item>
+    <item name="android:textSize">16sp</item>
+  </style>
+  <style name="headcol1">
+    <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">600</item>
+  
+    <item name="android:padding">3dp</item>
+    <item name="android:layout_column">1</item>
+    <item name="android:textSize">20sp</item>
+  </style>
+  <style name="col2">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">600</item>
+    <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
+    <item name="android:padding">3dp</item>
+    <item name="android:textSize">16sp</item>
+    <item name="android:textColor">#11142D</item>
+  </style>
+
+  <style name="headcol2">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">600</item>
+    <item name="fontPath">fonts/Montserrat-Regular.ttf</item>
+    <item name="android:padding">3dp</item>
+    <item name="android:textSize">20sp</item>
+  </style>
+  <style name="chipstyle">
+    <item name="android:layout_width">100dp</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:layout_marginStart">8dp</item>
+    <item name="android:layout_marginLeft">8dp</item>
+    <item name="android:layout_marginTop">16dp</item>
+    <item name="android:textColor">#11142D</item>
+  </style>
+
+  <style name="text_progress_bar">
+    <item name="android:textSize">20sp</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">600</item>
+    <item name="android:fontFamily">monospace</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:layout_marginTop">10dp</item>
+  </style>
+  <style name="point">
+    <item name="android:layout_width">6dp</item>
+    <item name="android:layout_height">6dp</item>
+
+    <item name="android:layout_marginRight">10dp</item>
+  </style>
+  <style name="present_point">
+    <item name="android:layout_width">20dp</item>
+    <item name="android:layout_height">6dp</item>
+  
+  </style>
+  <style name="head_add_user">
+    <item name="android:textSize">24sp</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">600</item>
+    <item name="android:fontFamily">monospace</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+  </style>
+  <style name="progress">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">500</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:layout_marginTop">20dp</item>
+    <item name="android:layout_marginBottom">20dp</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+  <style name="brake_line">
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">2dp</item>
+    <item name="android:layout_marginTop">20dp</item>
+    <item name="android:layout_marginBottom">20dp</item>
+    <item name="android:background">#FF909090</item>
+  </style>
+  <style name="head_add_user2">
+    <item name="android:textSize">16sp</item>
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">600</item>
+    <item name="android:fontFamily">monospace</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:layout_marginTop">10dp</item>
+  </style>
+  <style name="head_add_user1">
+    <item name="android:textSize">20sp</item>
+    <item name="android:layout_width">wrap_content</item>
+    <item name="android:layout_height">wrap_content</item>
+    <item name="android:textFontWeight">600</item>
+    <item name="android:fontFamily">monospace</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+  </style>
+  <style name="arrow">
+    <item name="android:layout_width">18dp</item>
+    <item name="android:layout_height">18dp</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginTop">20dp</item>
+    <item name="android:layout_marginBottom">20dp</item>
+    <item name="android:gravity">center_vertical</item>
+  </style>
+  <style name="button_next">
+    <item name="android:layout_width">match_parent</item>
+    <item name="android:layout_height">18dp</item>
+    <item name="android:layout_marginLeft">20dp</item>
+    <item name="android:layout_marginRight">20dp</item>
+    <item name="android:layout_marginBottom">20dp</item>
+    <item name="android:gravity">center</item>
+  </style>
+</resources>
