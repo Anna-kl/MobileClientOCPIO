@@ -417,34 +417,7 @@ namespace AdminBooking
             EditText edit1 = FindViewById<EditText>(Resource.Id.editText1);
 
             var liner = FindViewById<LinearLayout>(Resource.Id.linearLayout1);
-            liner.Click +=async delegate
-            {
-                var client = PostClient(null);
-                var reg = new Register
-                {
-                    email = number,
-                    password = "1234",
-                    role = "owner",
-                    uid = user.id
-                };
-                HttpContent cont = new StringContent(JsonConvert.SerializeObject(reg, Formatting.Indented), Encoding.UTF8, "application/json");
-                var res = await client.PostAsync(Url + "auths/token", cont);
-                var result = JsonConvert.DeserializeObject<Response>(await res.Content.ReadAsStringAsync());
-                if (result.status.code == System.Net.HttpStatusCode.NotFound)
-                    NameCompany();
-                else
-                {
-                    var user = JsonConvert.DeserializeObject<SendAuth>(result.responce.ToString());
-                    Intent intent = new Intent(this, typeof(HelloActivity)); //Added the type of Main Activity
-
-                    string put_name = token;
-                    
-                        intent.PutExtra("token", user.token);
-
-                    SetResult(Android.App.Result.Ok, intent); //added the SetResult method.
-                    Finish();
-                }
-            };
+           
             EditText edit2 = FindViewById<EditText>(Resource.Id.editText2);
             EditText edit3 = FindViewById<EditText>(Resource.Id.editText3);
             EditText edit4 = FindViewById<EditText>(Resource.Id.editText4);
@@ -487,15 +460,56 @@ namespace AdminBooking
                 }
              
             };
-        
-          
+            liner.Click += async delegate
+            {
+                var client = PostClient(null);
+                var send = new SendCode
+                {
+                    code = String.Format("{0}{1}{2}{3}", edit1.Text, edit2.Text, edit3.Text, edit4.Text),
+                    phone = number.Replace("+","").Replace("(","").Replace(")","")
+                };
+                HttpContent cont = new StringContent(JsonConvert.SerializeObject(send, Formatting.Indented), Encoding.UTF8, "application/json");
+                var result = await client.PostAsync(string.Format("{0}auths/code", Url), cont);
+                var res = JsonConvert.DeserializeObject<Response>(await result.Content.ReadAsStringAsync());
+                if (res.status.code == System.Net.HttpStatusCode.OK)
+                {
+                    var reg = new Register
+                    {
+                        email = number,
+                        password = "1234",
+                        role = "owner",
+                        uid = user.id
+                    };
+                    HttpContent smsCont = new StringContent(JsonConvert.SerializeObject(reg, Formatting.Indented), Encoding.UTF8, "application/json");
+                    var sms = await client.PostAsync(Url + "auths/token", smsCont);
+                    var smsResult = JsonConvert.DeserializeObject<Response>(await sms.Content.ReadAsStringAsync());
+                    if (smsResult.status.code == System.Net.HttpStatusCode.NotFound)
+                        NameCompany();
+                    else
+                    {
+                        var user = JsonConvert.DeserializeObject<SendAuth>(smsResult.responce.ToString());
+                        Intent intent = new Intent(this, typeof(HelloActivity)); //Added the type of Main Activity
+
+                        string put_name = token;
+
+                        intent.PutExtra("token", user.token);
+
+                        SetResult(Android.App.Result.Ok, intent); //added the SetResult method.
+                        Finish();
+                    }
+                }
+                else
+                {
+                    TextView error = FindViewById<TextView>(Resource.Id.textView2);
+                    error.Text = "Неверный код";
+                }
+            };
+
             CheckBox check = FindViewById<CheckBox>(Resource.Id.checkBox1);
             check.CheckedChange +=async delegate
             {
                 if (check.Checked)
                 {
-                    
-
                     liner.SetBackgroundColor(Color.ParseColor("#008E74"));
                 }
             };
@@ -515,12 +529,25 @@ namespace AdminBooking
             CheckBox box = FindViewById<CheckBox>(Resource.Id.checkBoxColor);
             var card = FindViewById(Resource.Id.cardView1);
 
-            card.Click += delegate
+            card.Click +=async delegate
             {
                 if (box.Checked && edit.Text.Length == 12)
                 {
                     number = edit.Text;
-                    AddInformationSMS("+7" + edit.Text);
+                    var client = PostClient(null);
+                    var phone = String.Format("{0}auths/code?phone=7{1}",
+                        Url, number.Replace("(", "").Replace(")", ""));
+                    var res = await client.GetStringAsync(String.Format("{0}auths/code?phone=7{1}",
+                        Url, number.Replace("(", "").Replace(")","")));
+                    var result = JsonConvert.DeserializeObject<Response>(res);
+                    if (result.status.code == System.Net.HttpStatusCode.OK)
+                    {
+                        AddInformationSMS("+7" + edit.Text);
+                    } else
+                    {
+                        TextView error = FindViewById<TextView>(Resource.Id.textError);
+                        error.Text = "Невозможно сделать звонок";
+                    }
                 }
             };
             box.CheckedChange += delegate
@@ -553,56 +580,6 @@ namespace AdminBooking
                 
                 delete = edit.Text.Length;
             };
-        }
-
-        private PlotModel CreatePlotModel(Zakaz zakaz)
-        {
-            var modelP1 = new PlotModel { Title = "Записи" };
-
-            var seriesP1 = new PieSeries { StrokeThickness = 2.0, InsideLabelPosition = 0.8, AngleSpan = 360, StartAngle = 0 };
-
-            seriesP1.Slices.Add(new PieSlice("Завершенные", zakaz.complete) { IsExploded = false, Fill = OxyColors.PaleVioletRed });
-          
-            seriesP1.Slices.Add(new PieSlice("Отказы", zakaz.canceled) { IsExploded = true });
-
-
-            modelP1.Series.Add(seriesP1);
-
-            return modelP1;
-        }
-        private PlotModel CreatePlotModel1(Zakaz zakaz)
-        {
-            var plotModel = new PlotModel { Title = "Клиенты" };
-
-            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Bottom });
-            plotModel.Axes.Add(new LinearAxis { Position = AxisPosition.Left, Maximum = 10, Minimum = 0 });
-
-            var series1 = new LineSeries
-            {
-                MarkerType = MarkerType.Circle,
-                MarkerSize = 4,
-
-                MarkerStroke = OxyColors.White
-            };
-            var series2 = new LineSeries
-            {
-                MarkerType = MarkerType.Circle,
-                MarkerSize = 4,
-
-                MarkerStroke = OxyColors.Red
-            };
-
-            //series1.Points.Add(new DataPoint(0.0, zakaz.current * 0.5));
-            //series1.Points.Add(new DataPoint(1.0, zakaz.current * 1));
-            //series1.Points.Add(new DataPoint(2.0, zakaz.current * 0.7));
-            //series2.Points.Add(new DataPoint(0.0, zakaz.new_c * 0.3));
-            //series2.Points.Add(new DataPoint(1.0, zakaz.new_c * 3));
-            //series2.Points.Add(new DataPoint(2.0, zakaz.new_c * 3));
-
-
-            plotModel.Series.Add(series1);
-            plotModel.Series.Add(series2);
-            return plotModel;
         }
         protected override void OnCreate(Bundle savedInstanceState)
         {

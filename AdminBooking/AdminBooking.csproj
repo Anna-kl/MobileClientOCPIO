@@ -91,6 +91,7 @@
     <Compile Include="Model\Auth\Account.cs" />
     <Compile Include="Model\Auth\Register.cs" />
     <Compile Include="Model\Auth\SendAuth.cs" />
+    <Compile Include="Model\Auth\SendCode.cs" />
     <Compile Include="Model\Auth\UID.cs" />
     <Compile Include="Model\Category.cs" />
     <Compile Include="Model\DataPokaz.cs" />
